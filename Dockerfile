@@ -15,5 +15,4 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
-# Nu copia nimic la build ca sa mearga si pe folder gol.
 CMD ["php-fpm"]
