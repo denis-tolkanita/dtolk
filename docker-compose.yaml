@@ -22,7 +22,7 @@ services:
       - postgres
       - redis
     networks:
-      - laravel
+      - dtolk_network
 
   nginx:
     image: nginx:1.27-alpine
@@ -35,7 +35,7 @@ services:
     depends_on:
       - app
     networks:
-      - laravel
+      - dtolk_network
 
   postgres:
     image: postgres:16-alpine
@@ -49,7 +49,7 @@ services:
     volumes:
       - pg_data:/var/lib/postgresql/data
     networks:
-      - laravel
+      - dtolk_network
 
   redis:
     image: redis:7-alpine
@@ -59,12 +59,23 @@ services:
     volumes:
       - redis_data:/data
     networks:
-      - laravel
+      - dtolk_network
+
+  adminer:
+    image: adminer:latest
+    container_name: adminer
+    restart: unless-stopped
+    ports:
+      - "8081:8080"
+    depends_on:
+      - postgres
+    networks:
+      - dtolk_network
 
 volumes:
   pg_data:
   redis_data:
 
 networks:
-  laravel:
+  dtolk_network:
     driver: bridge
