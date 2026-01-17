@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: laravel_app
+    container_name: app
     working_dir: /var/www/html
     volumes:
       - ./:/var/www/html
@@ -13,9 +13,9 @@ services:
       DB_CONNECTION: pgsql
       DB_HOST: postgres
       DB_PORT: 5432
-      DB_DATABASE: laravel
-      DB_USERNAME: laravel
-      DB_PASSWORD: laravel
+      DB_DATABASE: dtolk
+      DB_USERNAME: user
+      DB_PASSWORD: dtolk1998
       REDIS_HOST: redis
       REDIS_PORT: 6379
     depends_on:
@@ -26,7 +26,7 @@ services:
 
   nginx:
     image: nginx:1.27-alpine
-    container_name: laravel_nginx
+    container_name: nginx
     ports:
       - "8080:80"
     volumes:
@@ -39,11 +39,11 @@ services:
 
   postgres:
     image: postgres:16-alpine
-    container_name: laravel_postgres
+    container_name: postgres
     environment:
-      POSTGRES_DB: laravel
-      POSTGRES_USER: laravel
-      POSTGRES_PASSWORD: laravel
+      POSTGRES_DB: dtolk
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: dtolk1998
     ports:
       - "5432:5432"
     volumes:
@@ -53,7 +53,7 @@ services:
 
   redis:
     image: redis:7-alpine
-    container_name: laravel_redis
+    container_name: redis
     ports:
       - "6379:6379"
     volumes:
